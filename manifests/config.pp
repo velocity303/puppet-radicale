@@ -12,4 +12,10 @@ class radicale::config {
     mode    => '0644',
     notify  => Service[$::radicale::service_name],
   }
+  file { $::radicale::service_config:
+    ensure  => present,
+    content => template("${module_name}/service.erb"),
+    mode    => '0644',
+    notify  => Service[$::radicale::service_name],
+  }
 }

@@ -14,17 +14,17 @@
 # IPv4 syntax: address:port
 # IPv6 syntax: [address]:port
 # IPv6 adresses are configured to only allow IPv6 connections
-#hosts = 0.0.0.0:5232
+hosts = 0.0.0.0:<%= @port %>
 # Daemon flag
 #daemon = False
 # File storing the PID in daemon mode
 #pid =
 # SSL flag, enable HTTPS protocol
-#ssl = False
+ssl = <%= @ssl_enabled %>
 # SSL certificate path
-#certificate = /etc/apache2/ssl/server.crt
+certificate = <%= @cert_file %>
 # SSL private key
-#key = /etc/apache2/ssl/server.key
+key = <%= @cert_key %>
 # Reverse DNS to resolve client address in logs
 #dns_lookup = True
 # Root URL of Radicale (starting and ending with a slash)
@@ -43,7 +43,7 @@
 [auth]
 # Authentication method
 # Value: None | htpasswd | IMAP | LDAP | PAM | courier | http
-#type = None
+type = <%= @auth_method %>
 
 # Usernames used for public collections, separated by a comma
 #public_users = public
@@ -57,7 +57,7 @@
 #htpasswd_encryption = crypt
 
 # LDAP server URL, with protocol and port
-#ldap_url = ldap://localhost:389/
+#ldap_url = ldap://localhost:389
 # LDAP base path
 #ldap_base = ou=users,dc=example,dc=com
 # LDAP login attribute
@@ -123,7 +123,7 @@ filesystem_folder = /var/lib/radicale/collections
 # If no config is given, simple information is printed on the standard output
 # For more information about the syntax of the configuration file, see:
 # http://docs.python.org/library/logging.config.html
-#config = /etc/radicale/logging
+config = <%= scope.lookupvar('::radicale::log_config') %>
 # Set the default logging level to debug
 #debug = False
 # Store all environment variables (including those set in the shell)
